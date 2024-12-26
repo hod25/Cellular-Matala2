@@ -1,5 +1,6 @@
 package com.example.cellular_matala2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -8,9 +9,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.idz.colman24class2.adapter.StudentsRecyclerAdapter
-import com.idz.colman24class2.model.Model
-import com.idz.colman24class2.model.Student
+import com.example.cellular_matala2.model.Model
+import com.example.cellular_matala2.model.Student
+import com.example.cellular_matala2.adapter.StudentsRecyclerAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 interface OnItemClickListener {
     fun onItemClick(position: Int)
@@ -30,10 +32,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // TODO: 1. Create layout ✅
-        // TODO: 2. Create adapter ✅
-        // TODO: 3. Create ViewHolder ✅
 
         students = Model.shared.students
         val recyclerView: RecyclerView = findViewById(R.id.students_list_activity_recycler_view)
@@ -56,5 +54,11 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
+        val fabAddStudent: FloatingActionButton = findViewById(R.id.fab_add_student)
+        fabAddStudent.setOnClickListener {
+            // Start AddStudentActivity
+            val intent = Intent(this, AddStudentActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

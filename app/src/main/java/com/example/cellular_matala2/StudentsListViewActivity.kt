@@ -13,8 +13,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.idz.colman24class2.model.Model
-import com.idz.colman24class2.model.Student
+import com.example.cellular_matala2.model.Student
+import com.example.cellular_matala2.model.Model
 
 class StudentsListViewActivity : AppCompatActivity() {
 
