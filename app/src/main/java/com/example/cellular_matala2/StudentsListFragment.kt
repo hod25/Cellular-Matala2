@@ -1,6 +1,5 @@
 package com.example.cellular_matala2
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class StudentsListFragment : Fragment() {
 
     private var students: MutableList<Student>? = null
-    private lateinit var adapter: StudentsRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,30 +32,33 @@ class StudentsListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
 
-        adapter = StudentsRecyclerAdapter(students)
+        val adapter = StudentsRecyclerAdapter(students)
+
+        adapter.listener = object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                Log.d("TAG", "On click Activity listener on position $position")
+            }
+
+            override fun onItemClick(student: Student?) {
+                Log.d("TAG", "On student clicked name: ${student?.name}")
+
+                // Navigate to AddStudentActivity
+                val intent = Intent(requireContext(), AddStudentActivity::class.java)
+                intent.putExtra("student_name", student?.name)
+                intent.putExtra("student_id", student?.id)
+                startActivity(intent)
+            }
+        }
+
         recyclerView.adapter = adapter
 
         // Set up the FloatingActionButton click listener
         val fabAddStudent: FloatingActionButton = view.findViewById(R.id.fab_add_student)
         fabAddStudent.setOnClickListener {
             val intent = Intent(requireContext(), AddStudentActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE_ADD_STUDENT)
+            startActivity(intent)
         }
 
         return view
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_ADD_STUDENT && resultCode == Activity.RESULT_OK) {
-            data?.getParcelableExtra<Student>("new_student")?.let { newStudent ->
-                students?.add(newStudent)
-                adapter.notifyItemInserted(students?.size?.minus(1) ?: 0)
-            }
-        }
-    }
-
-    companion object {
-        private const val REQUEST_CODE_ADD_STUDENT = 1
     }
 }
