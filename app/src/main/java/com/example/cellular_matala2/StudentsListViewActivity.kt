@@ -13,8 +13,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.cellular_matala2.model.Student
 import com.example.cellular_matala2.model.Model
+import com.example.cellular_matala2.model.Student
 
 class StudentsListViewActivity : AppCompatActivity() {
 
@@ -37,9 +37,9 @@ class StudentsListViewActivity : AppCompatActivity() {
         // TODO: 5. Set dynamic data (MVP) 👨‍🎓
         // TODO: 6. On click on checkbox
 
-        students = Model.shared.students
-        val listView: ListView = findViewById(R.id.students_list_view)
-        listView.adapter = StudentsAdapter()
+//        students = Model.shared.students
+//        val listView: ListView = findViewById(R.id.students_list_view)
+//        listView.adapter = StudentsAdapter()
     }
 
     inner class StudentsAdapter(): BaseAdapter() {
