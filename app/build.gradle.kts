@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.idz.colman24class2"
+    namespace = "com.example.cellular_matala2"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.idz.colman24class2"
+        applicationId = "com.example.cellular_matala2"
         minSdk = 29
         targetSdk = 34
         versionCode = 1

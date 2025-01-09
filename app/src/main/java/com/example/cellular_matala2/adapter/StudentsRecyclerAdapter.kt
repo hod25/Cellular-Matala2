@@ -7,9 +7,13 @@ import com.example.cellular_matala2.OnItemClickListener
 import com.example.cellular_matala2.R
 import com.example.cellular_matala2.model.Student
 
-class StudentsRecyclerAdapter(private val students: List<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
+class StudentsRecyclerAdapter(private var students: List<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
 
     var listener: OnItemClickListener? = null
+
+    fun set(students: List<Student>?) {
+        this.students = students
+    }
 
     override fun getItemCount(): Int = students?.size ?: 0
 

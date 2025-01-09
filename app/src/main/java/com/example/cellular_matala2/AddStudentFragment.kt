@@ -1,6 +1,5 @@
-package com.example.cellular_matala2
+package com.example.cellular_matala2os.Bundle
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -10,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.os.Bundle
 import androidx.navigation.Navigation
-import com.example.cellular_matala2.BlueFragment.Companion.TITLE
 import com.example.cellular_matala2.databinding.FragmentAddStudentBinding
 import com.example.cellular_matala2.model.Model
 import com.example.cellular_matala2.model.Student
@@ -64,12 +63,5 @@ class AddStudentFragment : Fragment() {
 
     private fun onCancelClicked(view: View) {
         Navigation.findNavController(view).popBackStack()
-    }
-    fun newInstance(title: String): AddStudentFragment {
-        return AddStudentFragment().apply {
-            arguments = Bundle().apply {
-                putString(TITLE, title)
-            }
-        }
     }
 }

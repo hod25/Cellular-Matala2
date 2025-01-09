@@ -55,7 +55,9 @@ class StudentsListFragment : Fragment() {
 //                Navigation.findNavController(view).navigate(R.id.action_studentsListFragment_to_blueFragment)
 
                 student?.let {
-                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(it.name)
+//                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(it.name)
+//                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToEditStudentFragment(it.name, it.id, it.isChecked)
+                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToDetailsStudentFragment(it.name, it.id, it.isChecked)
                     binding?.root?.let {
                         Navigation.findNavController(it).navigate(action)
                     }

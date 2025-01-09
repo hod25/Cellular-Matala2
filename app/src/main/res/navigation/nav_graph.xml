@@ -6,18 +6,6 @@
     app:startDestination="@id/studentsListFragment">
 
     <fragment
-        android:id="@+id/studentsListFragment"
-        android:name="com.example.cellular_matala2.StudentsListFragment"
-        android:label="Students List"
-        tools:layout="@layout/fragment_students_list">
-        <action
-            android:id="@+id/action_studentsListFragment_to_addStudentFragment2"
-            app:destination="@id/addStudentFragment" />
-        <action
-            android:id="@+id/action_studentsListFragment_to_blueFragment"
-            app:destination="@id/blueFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/blueFragment"
         android:name="com.example.cellular_matala2.BlueFragment"
         android:label="fragment_blue"
@@ -28,12 +16,48 @@
     </fragment>
     <fragment
         android:id="@+id/addStudentFragment"
-        android:name="com.example.cellular_matala2.AddStudentFragment"
+        android:name="ccom.example.cellular_matala2.AddStudentFragment"
         android:label="Add Student"
-        tools:layout="@layout/fragment_add_student">
-<!--        <argument-->
-<!--        android:name="name"-->
-<!--        app:argType="string" />-->
-    </fragment>
+        tools:layout="@layout/fragment_add_student" />
     <action android:id="@+id/action_global_addStudentFragment" app:destination="@id/addStudentFragment" />
+    <fragment
+        android:id="@+id/editStudentFragment"
+        android:name="com.example.cellular_matala2.EditStudentFragment"
+        android:label="Edit Student">
+        <argument
+            android:name="studentName"
+            app:argType="string" />
+        <argument
+            android:name="studentId"
+            app:argType="string" />
+        <argument
+            android:name="studentStatus"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentsListFragment"
+        android:name="com.example.cellular_matala2.StudentsListFragment"
+        android:label="Students List">
+        <action
+            android:id="@+id/action_studentsListFragment_to_detailsStudentFragment"
+            app:destination="@id/detailsStudentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsStudentFragment"
+        android:name="com.example.cellular_matala2.DetailsStudentFragment"
+        android:label="Student Details">
+        <argument
+            android:name="studentName"
+            app:argType="string" />
+        <argument
+            android:name="studentId"
+            app:argType="string" />
+        <argument
+            android:name="studentStatus"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_detailsStudentFragment_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
+    </fragment>
 </navigation>
