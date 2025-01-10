@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.cellular_matala2.databinding.FragmentEditStudentBinding
+import com.example.cellular_matala2.model.Student
 
 class EditStudentFragment : Fragment() {
 
@@ -47,10 +48,16 @@ class EditStudentFragment : Fragment() {
     private fun saveData() {
         val sharedPreferences = activity?.getSharedPreferences("student_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
-        editor?.putString("studentName", binding?.nameEditText?.text.toString())
-        editor?.putString("studentId", binding?.idEditText?.text.toString())
-        editor?.putBoolean("studentStatus", binding?.statusCheckBox?.isChecked ?: false)
+        val student = Student(
+            id = binding?.idEditText?.text.toString(),
+            name = binding?.nameEditText?.text.toString(),
+            avatarUrl = "", // Add the appropriate avatar URL if needed
+            isChecked = binding?.statusCheckBox?.isChecked ?: false
+        )
+        editor?.putString("studentName", student.name)
+        editor?.putString("studentId", student.id)
+        editor?.putBoolean("studentStatus", student.isChecked)
         editor?.apply()
-        Log.d("EditStudentFragment", "Data saved: ${binding?.nameEditText?.text}, ${binding?.idEditText?.text}, ${binding?.statusCheckBox?.isChecked}")
+        Log.d("EditStudentFragment", "Data saved: ${student.name}, ${student.id}, ${student.isChecked}")
     }
 }

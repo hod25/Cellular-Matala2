@@ -95,4 +95,5 @@ class StudentsListFragment : Fragment() {
             binding?.progressBar?.visibility = View.GONE
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.cellular_matala2
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,6 @@ import com.example.cellular_matala2.databinding.FragmentDetailsStudentBinding
 class DetailsStudentFragment : Fragment() {
 
     private var binding: FragmentDetailsStudentBinding? = null
-    private val args: DetailsStudentFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,16 +20,22 @@ class DetailsStudentFragment : Fragment() {
     ): View? {
         binding = FragmentDetailsStudentBinding.inflate(inflater, container, false)
 
+        // Retrieve the saved data from shared preferences
+        val sharedPreferences = activity?.getSharedPreferences("student_prefs", Context.MODE_PRIVATE)
+        val studentName = sharedPreferences?.getString("studentName", "")
+        val studentId = sharedPreferences?.getString("studentId", "")
+        val studentStatus = sharedPreferences?.getBoolean("studentStatus", false) ?: false
+
         // Set the name, id, and status to the corresponding views
-        binding?.nameTextView?.text = args.studentName
-        binding?.idTextView?.text = args.studentId
-        binding?.statusCheckBox?.isChecked = args.studentStatus
+        binding?.nameTextView?.text = studentName
+        binding?.idTextView?.text = studentId
+        binding?.statusCheckBox?.isChecked = studentStatus
 
         binding?.editButton?.setOnClickListener {
             val action = DetailsStudentFragmentDirections.actionDetailsStudentFragmentToEditStudentFragment(
-                args.studentName ?: "",
-                args.studentId ?: "",
-                args.studentStatus
+                studentName ?: "",
+                studentId ?: "",
+                studentStatus
             )
             Navigation.findNavController(it).navigate(action)
         }
