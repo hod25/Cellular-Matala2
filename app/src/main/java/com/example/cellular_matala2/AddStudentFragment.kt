@@ -1,4 +1,4 @@
-package com.example.cellular_matala2os.Bundle
+package com.example.cellular_matala2
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
