@@ -50,6 +50,8 @@ class AddStudentFragment : Fragment() {
             name = binding?.nameEditText?.text?.toString() ?: "",
             id = binding?.idEditText?.text?.toString() ?: "",
             avatarUrl = "",
+            phone = "",
+            address = "",
             isChecked = false
         )
 

@@ -52,6 +52,8 @@ class EditStudentFragment : Fragment() {
             id = binding?.idEditText?.text.toString(),
             name = binding?.nameEditText?.text.toString(),
             avatarUrl = "", // Add the appropriate avatar URL if needed
+            phone = binding?.phoneEditText?.text.toString(),
+            address = binding?.addressEditText?.text.toString(),
             isChecked = binding?.statusCheckBox?.isChecked ?: false
         )
         editor?.putString("studentName", student.name)
