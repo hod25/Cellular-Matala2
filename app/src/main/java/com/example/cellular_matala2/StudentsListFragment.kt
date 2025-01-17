@@ -15,6 +15,7 @@ import com.example.cellular_matala2.adapter.StudentsRecyclerAdapter
 import com.example.cellular_matala2.databinding.FragmentStudentsListBinding
 import com.example.cellular_matala2.model.Model
 import com.example.cellular_matala2.model.Student
+import com.example.cellular_matala2.model.dao.StudentDao
 
 class StudentsListFragment : Fragment() {
 
@@ -30,13 +31,6 @@ class StudentsListFragment : Fragment() {
 
         binding = FragmentStudentsListBinding.inflate(inflater, container, false)
 
-        // TODO: Set DB ✅
-        // TODO: Refactor Model to support local db ✅
-        // TODO: Refactor Fragments to work with live data ✅
-        // TODO: Add progress indicator for better UX
-        // TODO: Migrate to ViewBinding
-
-
         binding?.recyclerView?.setHasFixedSize(true)
 
         val layoutManager = LinearLayoutManager(context)
@@ -50,19 +44,20 @@ class StudentsListFragment : Fragment() {
             }
 
             override fun onItemClick(student: Student?) {
-                Log.d("TAG", "On student clicked name: ${student?.name}")
-
-//                Navigation.findNavController(view).navigate(R.id.action_studentsListFragment_to_blueFragment)
-
-                student?.let {
-//                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToBlueFragment(it.name)
-//                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToEditStudentFragment(it.name, it.id, it.isChecked)
-                    val action = StudentsListFragmentDirections.actionStudentsListFragmentToDetailsStudentFragment(it.name, it.id, it.isChecked)
-                    binding?.root?.let {
-                        Navigation.findNavController(it).navigate(action)
+                student?.let { selectedStudent ->
+                    getStudentById(selectedStudent) { fetchedStudent ->
+                        fetchedStudent?.let {
+                            val action = StudentsListFragmentDirections.actionStudentsListFragmentToDetailsStudentFragment(it.name,it.id,it.isChecked,it.phone,it.address)
+                            binding?.root?.let { rootView ->
+                                Navigation.findNavController(rootView).navigate(action)
+                            }
+                        } ?: run {
+                            Log.e("TAG", "Student not found")
+                        }
                     }
                 }
             }
+
         }
 
         binding?.recyclerView?.adapter = adapter
@@ -95,5 +90,18 @@ class StudentsListFragment : Fragment() {
             binding?.progressBar?.visibility = View.GONE
         }
     }
+
+    private fun getStudentById(student: Student, callback: (Student) -> Unit) {
+        binding?.progressBar?.visibility = View.VISIBLE
+
+        Model.shared.getStudentById(student.id) { result ->
+            this.students = listOf(result)
+            adapter?.set(this.students)
+            adapter?.notifyDataSetChanged()
+            binding?.progressBar?.visibility = View.GONE
+            callback(result)
+        }
+    }
+
 
 }

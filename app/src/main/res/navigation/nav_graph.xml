@@ -6,17 +6,8 @@
     app:startDestination="@id/studentsListFragment">
 
     <fragment
-        android:id="@+id/blueFragment"
-        android:name="com.example.cellular_matala2.BlueFragment"
-        android:label="fragment_blue"
-        tools:layout="@layout/fragment_blue" >
-        <argument
-            android:name="studentTitle"
-            app:argType="string" />
-    </fragment>
-    <fragment
         android:id="@+id/addStudentFragment"
-        android:name="ccom.example.cellular_matala2.AddStudentFragment"
+        android:name="com.example.cellular_matala2.AddStudentFragment"
         android:label="Add Student"
         tools:layout="@layout/fragment_add_student" />
     <action android:id="@+id/action_global_addStudentFragment" app:destination="@id/addStudentFragment" />
@@ -33,6 +24,10 @@
         <argument
             android:name="studentStatus"
             app:argType="boolean" />
+        <argument
+            android:name="studentPhone"
+            app:argType="string" />
+        <argument android:name="studentAddress" />
     </fragment>
     <fragment
         android:id="@+id/studentsListFragment"
@@ -59,5 +54,11 @@
         <action
             android:id="@+id/action_detailsStudentFragment_to_editStudentFragment"
             app:destination="@id/editStudentFragment" />
+        <argument
+            android:name="studentPhone"
+            app:argType="string" />
+        <argument
+            android:name="address"
+            app:argType="string" />
     </fragment>
 </navigation>

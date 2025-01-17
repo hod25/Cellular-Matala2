@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 
 class BlueFragment : Fragment() {
-
+/*
     private var textView: TextView? = null
     private var title: String? = null
 
@@ -51,5 +51,5 @@ class BlueFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 }

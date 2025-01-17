@@ -22,20 +22,26 @@ class DetailsStudentFragment : Fragment() {
 
         // Retrieve the saved data from shared preferences
         val sharedPreferences = activity?.getSharedPreferences("student_prefs", Context.MODE_PRIVATE)
-        val studentName = sharedPreferences?.getString("studentName", "")
+        val studentName = sharedPreferences?.getString("studentName","")
         val studentId = sharedPreferences?.getString("studentId", "")
         val studentStatus = sharedPreferences?.getBoolean("studentStatus", false) ?: false
+        val studentPhone = sharedPreferences?.getString("studentPhone", "")
+        val studentAddress= sharedPreferences?.getString("studentAddress", "")
 
         // Set the name, id, and status to the corresponding views
         binding?.nameTextView?.text = studentName
         binding?.idTextView?.text = studentId
         binding?.statusCheckBox?.isChecked = studentStatus
+        binding?.phoneTextView?.text = studentPhone
+        binding?.addressTextView?.text = studentAddress
 
         binding?.editButton?.setOnClickListener {
             val action = DetailsStudentFragmentDirections.actionDetailsStudentFragmentToEditStudentFragment(
                 studentName ?: "",
                 studentId ?: "",
-                studentStatus
+                studentStatus,
+                studentPhone ?: "",
+                studentAddress?:""
             )
             Navigation.findNavController(it).navigate(action)
         }

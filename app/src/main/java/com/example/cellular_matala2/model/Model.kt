@@ -7,6 +7,7 @@ import com.example.cellular_matala2.model.dao.AppLocalDbRepository
 import java.util.concurrent.Executors
 
 typealias StudentsCallback = (List<Student>) -> Unit
+typealias SingleStudentCallBack = (Student) -> Unit
 typealias EmptyCallback = () -> Unit
 
 interface GetAllStudentsListener {
@@ -31,6 +32,18 @@ class Model private constructor() {
 
             mainHandler.post {
                 callback(students)
+            }
+        }
+    }
+
+    fun getStudentById(studentId:String, callback: SingleStudentCallBack) {
+        executor.execute {
+            val student = database.studentDao().getStudentById(studentId)
+
+            Thread.sleep(4000)
+
+            mainHandler.post {
+                callback(student)
             }
         }
     }

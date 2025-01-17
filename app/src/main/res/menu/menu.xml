@@ -5,6 +5,6 @@
     <item
         android:id="@+id/addStudentFragment"
         android:icon="@android:drawable/ic_input_add"
-        android:title="Add"
+        android:title="@string/add"
         app:showAsAction="always" />
 </menu>

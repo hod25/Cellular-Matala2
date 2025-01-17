@@ -27,6 +27,8 @@ class EditStudentFragment : Fragment() {
         binding?.nameEditText?.setText(args.studentName)
         binding?.idEditText?.setText(args.studentId)
         binding?.statusCheckBox?.isChecked = args.studentStatus
+        binding?.phoneEditText?.setText(args.studentPhone)
+        binding?.addressEditText?.setText(args.studentAddress)
 
         binding?.cancelButton?.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
