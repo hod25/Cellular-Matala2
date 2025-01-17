@@ -2,6 +2,7 @@ package com.example.cellular_matala2
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,36 +19,33 @@ class DetailsStudentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailsStudentBinding.inflate(inflater, container, false)
+        binding = FragmentDetailsStudentBinding.inflate(inflater, container, false) // אתחול ה-binding
 
-        // Retrieve the saved data from shared preferences
-        val sharedPreferences = activity?.getSharedPreferences("student_prefs", Context.MODE_PRIVATE)
-        val studentName = sharedPreferences?.getString("studentName","")
-        val studentId = sharedPreferences?.getString("studentId", "")
-        val studentStatus = sharedPreferences?.getBoolean("studentStatus", false) ?: false
-        val studentPhone = sharedPreferences?.getString("studentPhone", "")
-        val studentAddress= sharedPreferences?.getString("studentAddress", "")
+        // כעת אתה יכול לגשת ל-binding בצורה תקינה
+        val args: DetailsStudentFragmentArgs by navArgs()
 
-        // Set the name, id, and status to the corresponding views
-        binding?.nameTextView?.text = studentName
-        binding?.idTextView?.text = studentId
-        binding?.statusCheckBox?.isChecked = studentStatus
-        binding?.phoneTextView?.text = studentPhone
-        binding?.addressTextView?.text = studentAddress
+        binding?.apply {
+            studentName.text = args.studentName
+            studentId.text = args.studentId
+            statusCheckBox.isChecked = args.studentStatus
+            studentPhone.text = args.studentPhone
+            studentAddress.text = args.studentAddress
+        }
 
         binding?.editButton?.setOnClickListener {
             val action = DetailsStudentFragmentDirections.actionDetailsStudentFragmentToEditStudentFragment(
-                studentName ?: "",
-                studentId ?: "",
-                studentStatus,
-                studentPhone ?: "",
-                studentAddress?:""
+                args.studentName ?: "",
+                args.studentId ?: "",
+                args.studentStatus,
+                args.studentPhone ?: "",
+                args.studentAddress ?: ""
             )
             Navigation.findNavController(it).navigate(action)
         }
 
         return binding?.root
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

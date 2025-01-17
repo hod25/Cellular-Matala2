@@ -58,7 +58,7 @@
             android:name="studentPhone"
             app:argType="string" />
         <argument
-            android:name="address"
+            android:name="studentAddress"
             app:argType="string" />
     </fragment>
 </navigation>
