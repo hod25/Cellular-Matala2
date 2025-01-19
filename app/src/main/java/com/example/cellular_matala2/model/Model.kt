@@ -71,4 +71,16 @@ class Model private constructor() {
             }
         }
     }
+
+    fun delete(student: Student, callback: EmptyCallback) {
+        executor.execute {
+            database.studentDao().delete(student)
+
+            Thread.sleep(4000)
+
+            mainHandler.post {
+                callback()
+            }
+        }
+    }
 }

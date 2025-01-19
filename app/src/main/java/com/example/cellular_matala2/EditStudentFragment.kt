@@ -39,7 +39,10 @@ class EditStudentFragment : Fragment() {
 
         binding?.saveButton?.setOnClickListener {
             saveData()
-            //Navigation.findNavController(it).navigateUp()
+        }
+
+        binding?.deleteButton?.setOnClickListener {
+            deleteData()
         }
 
         return binding?.root
@@ -55,33 +58,34 @@ class EditStudentFragment : Fragment() {
         val student = Student(
             id = binding?.idEditText?.text.toString(),
             name = binding?.nameEditText?.text.toString(),
+            avatarUrl = "",
+            phone = binding?.phoneEditText?.text.toString(),
+            address = binding?.addressEditText?.text.toString(),
+            isChecked = binding?.statusCheckBox?.isChecked ?: false
+        )
+
+        binding?.progressBar?.visibility = View.VISIBLE
+        Log.d("ARGS", student.name+student.id+student.phone+student.address)
+        Model.shared.updateStudent(student) {
+            binding?.progressBar?.visibility = View.GONE
+            findNavController().popBackStack(R.id.studentsListFragment, false)
+        }
+    }
+
+    private fun deleteData() {
+        val student = Student(
+            id = binding?.idEditText?.text.toString(),
+            name = binding?.nameEditText?.text.toString(),
             avatarUrl = "", // Add the appropriate avatar URL if needed
             phone = binding?.phoneEditText?.text.toString(),
             address = binding?.addressEditText?.text.toString(),
             isChecked = binding?.statusCheckBox?.isChecked ?: false
         )
 
-        // עדכון ברקע
         binding?.progressBar?.visibility = View.VISIBLE
         Log.d("ARGS", student.name+student.id+student.phone+student.address)
-        Model.shared.updateStudent(student) {
+        Model.shared.delete(student) {
             binding?.progressBar?.visibility = View.GONE
-
-            /*// יצירת Bundle עם הנתונים החדשים
-            val result = EditStudentFragmentDirections.
-                actionEditStudentFragmentToDetailsStudentFragment(
-                    student.name,
-                    student.id,
-                    student.isChecked,
-                    student.phone,
-                    student.address
-                )
-
-            if (isAdded && isVisible) {
-                findNavController().navigate()
-                requireActivity().recreate()
-            }*/
-
             findNavController().popBackStack(R.id.studentsListFragment, false)
         }
     }
