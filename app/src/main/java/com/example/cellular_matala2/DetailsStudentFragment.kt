@@ -19,11 +19,11 @@ class DetailsStudentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("FragmentLifecycle", "Fragment created")
         binding = FragmentDetailsStudentBinding.inflate(inflater, container, false) // אתחול ה-binding
 
-        // כעת אתה יכול לגשת ל-binding בצורה תקינה
-        val args: DetailsStudentFragmentArgs by navArgs()
-
+        val args = DetailsStudentFragmentArgs.fromBundle(requireArguments())
+        Log.d("ARGS",args.studentName+args.studentId+args.studentPhone+args.studentAddress)
         binding?.apply {
             studentName.text = args.studentName
             studentId.text = args.studentId

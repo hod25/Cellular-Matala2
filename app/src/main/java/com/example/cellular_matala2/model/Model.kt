@@ -48,6 +48,18 @@ class Model private constructor() {
         }
     }
 
+    fun updateStudent(student: Student, callback: EmptyCallback) {
+        executor.execute {
+            database.studentDao().updateStudent(student)
+
+            Thread.sleep(4000)
+
+            mainHandler.post {
+                callback()
+            }
+        }
+    }
+
     fun add(student: Student, callback: EmptyCallback) {
         executor.execute {
             database.studentDao().insertStudents(student)

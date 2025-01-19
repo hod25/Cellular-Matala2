@@ -47,11 +47,11 @@ class AddStudentFragment : Fragment() {
     private fun onSaveClicked(view: View) {
 
         val student = Student(
-            name = binding?.nameEditText?.text?.toString() ?: "",
-            id = binding?.idEditText?.text?.toString() ?: "",
+            name = binding?.studentName?.text?.toString() ?: "",
+            id = binding?.studentId?.text?.toString() ?: "",
             avatarUrl = "",
-            phone = "",
-            address = "",
+            phone = binding?.studentPhone?.text?.toString() ?: "",
+            address = binding?.studentAddress?.text?.toString() ?: "",
             isChecked = false
         )
 

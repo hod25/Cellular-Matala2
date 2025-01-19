@@ -1,4 +1,5 @@
 package com.example.cellular_matala2
+import androidx.navigation.fragment.findNavController
 
 import android.content.Context
 import android.os.Bundle
@@ -8,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.cellular_matala2.databinding.FragmentEditStudentBinding
+import com.example.cellular_matala2.model.Model
 import com.example.cellular_matala2.model.Student
 
 class EditStudentFragment : Fragment() {
@@ -36,7 +39,7 @@ class EditStudentFragment : Fragment() {
 
         binding?.saveButton?.setOnClickListener {
             saveData()
-            Navigation.findNavController(it).navigateUp()
+            //Navigation.findNavController(it).navigateUp()
         }
 
         return binding?.root
@@ -47,9 +50,8 @@ class EditStudentFragment : Fragment() {
         binding = null
     }
 
+
     private fun saveData() {
-        val sharedPreferences = activity?.getSharedPreferences("student_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
         val student = Student(
             id = binding?.idEditText?.text.toString(),
             name = binding?.nameEditText?.text.toString(),
@@ -58,10 +60,32 @@ class EditStudentFragment : Fragment() {
             address = binding?.addressEditText?.text.toString(),
             isChecked = binding?.statusCheckBox?.isChecked ?: false
         )
-        editor?.putString("studentName", student.name)
-        editor?.putString("studentId", student.id)
-        editor?.putBoolean("studentStatus", student.isChecked)
-        editor?.apply()
-        Log.d("EditStudentFragment", "Data saved: ${student.name}, ${student.id}, ${student.isChecked}")
+
+        // עדכון ברקע
+        binding?.progressBar?.visibility = View.VISIBLE
+        Log.d("ARGS", student.name+student.id+student.phone+student.address)
+        Model.shared.updateStudent(student) {
+            binding?.progressBar?.visibility = View.GONE
+
+            /*// יצירת Bundle עם הנתונים החדשים
+            val result = EditStudentFragmentDirections.
+                actionEditStudentFragmentToDetailsStudentFragment(
+                    student.name,
+                    student.id,
+                    student.isChecked,
+                    student.phone,
+                    student.address
+                )
+
+            if (isAdded && isVisible) {
+                findNavController().navigate()
+                requireActivity().recreate()
+            }*/
+
+            findNavController().popBackStack(R.id.studentsListFragment, false)
+        }
     }
+
+
+
 }

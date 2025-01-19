@@ -20,11 +20,11 @@ class AddStudentActivity : AppCompatActivity() {
             insets
         }
 
-        val saveButton: Button = findViewById(R.id.add_student_activity_save_button)
-        val cancelButton: Button = findViewById(R.id.add_student_activity_cancel_button)
+        val saveButton: Button = findViewById(R.id.save_button)
+        val cancelButton: Button = findViewById(R.id.cancel_button)
 
-        val nameEditText: EditText = findViewById(R.id.add_student_activity_name_edit_text)
-        val idEditText: EditText = findViewById(R.id.add_student_activity_id_edit_text)
+        val nameEditText: EditText = findViewById(R.id.studentName)
+        val idEditText: EditText = findViewById(R.id.studentId)
 
         val savedMessageTextView: TextView = findViewById(R.id.add_student_activity_save_message_text_view)
 
